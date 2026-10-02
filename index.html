@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#ff8fab">
+<title>郭丹妮南艺英语冲刺计划</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💖</text></svg>">
+<style>
+  :root{
+    --pink:#ff6b9d; --pink2:#ff8fab; --pink3:#fbb1c4; --purple:#c084fc;
+    --bg1:#ffe3ec; --bg2:#fff6f9;
+    --green:#34c77b; --orange:#ffb347; --red:#ff5d7a; --grey:#d8d0d6;
+    --text:#5b4a54; --muted:#a98f9b;
+    --shadow:0 6px 18px rgba(255,120,160,.18);
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","HarmonyOS Sans SC","Noto Sans SC","Microsoft YaHei",sans-serif;
+    background:linear-gradient(160deg,var(--bg1) 0%,var(--bg2) 45%,#fdeef7 100%);
+    color:var(--text);
+    min-height:100vh;
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+  .wrap{max-width:520px;margin:0 auto;padding:14px 14px 40px;}
+
+  /* 顶部品牌 */
+  .brand{display:flex;align-items:center;gap:12px;padding:8px 4px 14px;}
+  .brand .logo{
+    width:58px;height:58px;border-radius:50%;object-fit:contain;
+    background:#fff;padding:4px;box-shadow:var(--shadow);flex:0 0 auto;
+  }
+  .brand h1{
+    margin:0;font-size:20px;line-height:1.25;
+    background:linear-gradient(90deg,#ff5d7a,#c084fc);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    font-weight:800;letter-spacing:.5px;
+  }
+  .brand .sub{margin:0;font-size:12px;color:var(--muted);margin-top:3px;}
+
+  .card{
+    background:#fff;border-radius:22px;box-shadow:var(--shadow);
+    padding:16px;margin-bottom:14px;position:relative;overflow:hidden;
+  }
+  .card h2{
+    margin:0 0 10px;font-size:15px;color:var(--text);font-weight:800;
+    display:flex;align-items:center;gap:6px;
+  }
+  .card h2 .dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--purple));display:inline-block;}
+
+  /* 倒计时 */
+  .count{text-align:center;padding:20px 16px;}
+  .count .label{font-size:13px;color:var(--muted);letter-spacing:1px;}
+  .count .days{font-size:64px;font-weight:900;line-height:1;
+    background:linear-gradient(135deg,#ff5d7a,#ff8fab,#c084fc);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    margin:6px 0;
+  }
+  .count .days small{font-size:22px;font-weight:700;}
+  .count .time{font-size:15px;font-weight:700;color:var(--pink);letter-spacing:2px;margin-top:4px;}
+  .count .date{font-size:12px;color:var(--muted);margin-top:6px;}
+  .count .cheer{margin-top:12px;font-size:12px;color:var(--purple);}
+
+  /* 天气 */
+  .weather{display:flex;align-items:center;gap:14px;}
+  .weather .icon{font-size:44px;line-height:1;}
+  .weather .temp{font-size:40px;font-weight:900;color:var(--pink);line-height:1;}
+  .weather .temp small{font-size:18px;}
+  .weather .info{flex:1;}
+  .weather .info .wdesc{font-size:14px;font-weight:700;}
+  .weather .meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;}
+  .chip{background:#fff0f5;border:1px solid #ffdbe7;border-radius:12px;padding:5px 10px;font-size:12px;color:var(--text);}
+  .chip b{color:var(--pink);}
+  .weather .update{font-size:10px;color:var(--muted);margin-top:8px;text-align:right;}
+  .uv-badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:700;color:#fff;margin-left:4px;}
+
+  /* 总览 */
+  .overview .nums{display:flex;justify-content:space-around;text-align:center;}
+  .overview .num{font-size:26px;font-weight:900;color:var(--pink);}
+  .overview .cap{font-size:11px;color:var(--muted);margin-top:2px;}
+  .bar{height:10px;background:#ffe0ea;border-radius:20px;margin-top:12px;overflow:hidden;}
+  .bar i{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,var(--pink),var(--purple));transition:width .4s;}
+  .overview .acc{font-size:13px;text-align:center;margin-top:8px;color:var(--muted);}
+
+  /* 打卡 */
+  .ck-nums{display:flex;justify-content:space-around;text-align:center;margin-bottom:12px;}
+  .ck-num{font-size:30px;font-weight:900;color:var(--pink);}
+  .ck-btn{
+    width:100%;border:none;background:linear-gradient(135deg,var(--pink),var(--purple));color:#fff;
+    padding:14px;border-radius:16px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:var(--shadow);
+  }
+  .ck-btn:active{transform:scale(.98);}
+  .ck-btn.done{background:#ffe0ea;color:var(--pink);box-shadow:none;}
+  .ck-cal-head{display:flex;align-items:center;justify-content:space-between;margin:14px 0 8px;}
+  .ck-cal-head span{font-size:14px;font-weight:800;}
+  .ck-nav{border:none;background:#fff0f5;color:var(--pink);width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer;font-weight:800;}
+  .ck-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;text-align:center;}
+  .ck-grid .wd{font-size:11px;color:var(--muted);padding:3px 0;}
+  .ck-grid .day{height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text);}
+  .ck-grid .day.blank{visibility:hidden;}
+  .ck-grid .day.today{font-weight:900;color:var(--pink);box-shadow:inset 0 0 0 2px var(--pink);}
+  .ck-grid .day.checked{background:linear-gradient(135deg,var(--pink),var(--purple));color:#fff;font-weight:800;}
+  .ck-grid .day.checked.today{box-shadow:none;}
+  .ck-note{margin-top:12px;}
+  .ck-note label{font-size:12px;color:var(--muted);font-weight:700;display:block;margin-bottom:6px;}
+  .ck-note textarea{width:100%;border:1px solid #ffdbe7;border-radius:14px;background:#fff6f9;padding:10px;font-size:13px;color:var(--text);resize:vertical;min-height:52px;font-family:inherit;outline:none;}
+  .ck-note textarea:focus{border-color:var(--pink);}
+
+  /* 真题 */
+  .toolbar{display:flex;gap:8px;margin-bottom:8px;}
+  .toolbar button{
+    flex:1;border:none;background:#fff;color:var(--pink);font-weight:700;
+    padding:9px;border-radius:14px;font-size:13px;box-shadow:var(--shadow);cursor:pointer;
+  }
+  .toolbar button:active{transform:scale(.97);}
+  .year{border:1px solid #ffe0ea;border-radius:18px;margin-bottom:10px;background:#fffdfe;overflow:hidden;}
+  .year-head{
+    display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;
+  }
+  .year-head .y{font-weight:800;font-size:15px;}
+  .year-head .bar-mini{flex:1;height:8px;background:#ffe0ea;border-radius:20px;overflow:hidden;}
+  .year-head .bar-mini i{display:block;height:100%;background:linear-gradient(90deg,var(--pink),var(--purple));}
+  .year-head .rate{font-size:13px;font-weight:800;min-width:52px;text-align:right;}
+  .year-head .arrow{color:var(--muted);transition:transform .3s;font-size:12px;}
+  .year.open .arrow{transform:rotate(180deg);}
+  .year-body{display:none;padding:2px 14px 14px;}
+  .year.open .year-body{display:block;}
+  .passage{margin-top:10px;}
+  .passage .pname{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:6px;letter-spacing:.5px;}
+  .qs{display:flex;gap:8px;flex-wrap:wrap;}
+  .q{
+    width:40px;height:40px;border-radius:50%;border:2px solid var(--grey);background:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;
+    color:var(--muted);cursor:pointer;transition:all .15s;
+  }
+  .q:active{transform:scale(.9);}
+  .q.c{background:var(--green);border-color:var(--green);color:#fff;}
+  .q.w{background:var(--red);border-color:var(--red);color:#fff;}
+  .reason{margin-top:12px;}
+  .reason label{font-size:12px;color:var(--muted);font-weight:700;display:block;margin-bottom:6px;}
+  .reason textarea{
+    width:100%;border:1px solid #ffdbe7;border-radius:14px;background:#fff6f9;
+    padding:10px;font-size:13px;color:var(--text);resize:vertical;min-height:56px;
+    font-family:inherit;outline:none;
+  }
+  .reason textarea:focus{border-color:var(--pink);}
+
+  /* 生词本 */
+  .addrow{display:flex;gap:8px;}
+  .addrow input{
+    flex:1;border:1px solid #ffdbe7;border-radius:14px;padding:10px;font-size:14px;outline:none;
+    background:#fff6f9;color:var(--text);min-width:0;
+  }
+  .addrow input:focus{border-color:var(--pink);}
+  .addrow button{
+    border:none;background:linear-gradient(135deg,var(--pink),var(--purple));color:#fff;
+    border-radius:14px;padding:0 16px;font-size:14px;font-weight:800;cursor:pointer;
+  }
+  .wsearch{margin-top:8px;}
+  .wsearch input{width:100%;border:1px solid #ffdbe7;border-radius:14px;padding:9px;font-size:13px;outline:none;background:#fff6f9;}
+  .wcount{font-size:12px;color:var(--muted);margin:10px 0 6px;}
+  .word{
+    display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px dashed #ffe0ea;
+  }
+  .word:last-child{border-bottom:none;}
+  .word .w{font-weight:800;color:var(--pink);font-size:15px;min-width:0;word-break:break-all;}
+  .word .m{flex:1;font-size:13px;color:var(--text);}
+  .word .del{border:none;background:#ffe0ea;color:var(--red);border-radius:50%;width:26px;height:26px;font-size:14px;cursor:pointer;flex:0 0 auto;}
+  .empty{text-align:center;color:var(--muted);font-size:13px;padding:14px 0;}
+  .wbtns{display:flex;gap:8px;margin-top:12px;}
+  .wbtns button{
+    flex:1;border:none;padding:10px;border-radius:14px;font-weight:800;font-size:13px;cursor:pointer;
+  }
+  .wbtns .exp{background:linear-gradient(135deg,var(--pink),var(--purple));color:#fff;}
+  .wbtns .clr{background:#fff;color:var(--pink);border:1px solid var(--pink);}
+
+  /* 备份 */
+  .bk{display:flex;gap:8px;flex-wrap:wrap;}
+  .bk button{
+    flex:1;min-width:120px;border:none;padding:10px;border-radius:14px;font-weight:800;font-size:13px;cursor:pointer;
+  }
+  .bk .out{background:linear-gradient(135deg,var(--pink),var(--purple));color:#fff;}
+  .bk .in{background:#fff;color:var(--pink);border:1px solid var(--pink);}
+  .bknote{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.6;}
+
+  footer{text-align:center;font-size:12px;color:var(--muted);margin-top:18px;line-height:1.8;}
+  footer .heart{color:var(--pink);}
+  footer .brand2{font-weight:800;color:var(--pink);letter-spacing:.5px;}
+
+  /* 弹窗 */
+  .modal-bg{position:fixed;inset:0;background:rgba(90,60,75,.45);display:none;align-items:center;justify-content:center;z-index:99;padding:20px;}
+  .modal-bg.show{display:flex;}
+  .modal{background:#fff;border-radius:22px;width:100%;max-width:440px;padding:18px;box-shadow:0 10px 40px rgba(0,0,0,.2);}
+  .modal h3{margin:0 0 10px;font-size:16px;}
+  .modal textarea{width:100%;height:220px;border:1px solid #ffdbe7;border-radius:14px;padding:10px;font-size:12px;font-family:ui-monospace,Menlo,Consolas,monospace;background:#fffafc;outline:none;}
+  .modal .mbtns{display:flex;gap:8px;margin-top:10px;}
+  .modal .mbtns button{flex:1;border:none;padding:10px;border-radius:14px;font-weight:800;font-size:13px;cursor:pointer;}
+  .modal .copy{background:linear-gradient(135deg,var(--pink),var(--purple));color:#fff;}
+  .modal .dl{background:#fff;color:var(--pink);border:1px solid var(--pink);}
+  .modal .close{position:absolute;top:14px;right:14px;border:none;background:none;font-size:20px;color:var(--muted);cursor:pointer;}
+  .toast{position:fixed;left:50%;bottom:34px;transform:translateX(-50%);background:rgba(80,50,65,.92);color:#fff;padding:9px 18px;border-radius:24px;font-size:13px;opacity:0;transition:opacity .3s;z-index:100;pointer-events:none;}
+  .toast.show{opacity:1;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="brand">
+    <img class="logo" src="data:image/png;base64,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" alt="南京艺术学院校徽">
+    <div>
+      <h1>郭丹妮南艺英语冲刺计划</h1>
+      <p class="sub">✨ 考研英语二 · 逐题打卡 · 加油鸭 ✨</p>
+    </div>
+  </header>
+
+  <!-- 倒计时 -->
+  <section class="card count">
+    <div class="label">距离 2026 考研英语二 还有</div>
+    <div class="days"><span id="dDays">--</span><small> 天</small></div>
+    <div class="time" id="dTime">-- : -- : --</div>
+    <div class="date">考试时间：2026年12月19日（周六）上午 8:30</div>
+    <div class="cheer">🌸 每天进步一点点，南艺在等你 🌸</div>
+  </section>
+
+  <!-- 打卡 -->
+  <section class="card">
+    <h2><span class="dot"></span>每日学习打卡 🔥</h2>
+    <div class="ck-nums">
+      <div><div class="ck-num" id="ckStreak">0</div><div class="cap">连续打卡（天）</div></div>
+      <div><div class="ck-num" id="ckTotal">0</div><div class="cap">累计打卡（天）</div></div>
+    </div>
+    <button class="ck-btn" id="ckBtn" onclick="toggleToday()">🎀 今日打卡</button>
+    <div class="ck-cal-head">
+      <button class="ck-nav" onclick="navCal(-1)">‹</button>
+      <span id="ckMonth">—</span>
+      <button class="ck-nav" onclick="navCal(1)">›</button>
+    </div>
+    <div class="ck-grid" id="ckGrid"></div>
+    <div class="ck-note">
+      <label>📝 今日笔记（自动保存）</label>
+      <textarea id="ckNote" placeholder="今天学了什么、状态如何…" oninput="onNote(this.value)"></textarea>
+    </div>
+  </section>
+
+  <!-- 天气 -->
+  <section class="card">
+    <h2><span class="dot"></span>南京 · 今日实时</h2>
+    <div class="weather">
+      <div class="icon" id="wIcon">⛅</div>
+      <div class="temp"><span id="wTemp">--</span><small>℃</small></div>
+      <div class="info">
+        <div class="wdesc" id="wDesc">加载中…</div>
+        <div class="meta">
+          <span class="chip">体感 <b id="wFeel">--</b>℃</span>
+          <span class="chip">湿度 <b id="wHum">--</b>%</span>
+          <span class="chip">紫外线 <b id="wUv">--</b><span class="uv-badge" id="wUvLv">--</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="update" id="wUpdate">正在获取天气…</div>
+  </section>
+
+  <!-- 总览 -->
+  <section class="card overview">
+    <h2><span class="dot"></span>总正确率</h2>
+    <div class="nums">
+      <div><div class="num" id="oDone">0</div><div class="cap">已做 / 360</div></div>
+      <div><div class="num" id="oRight" style="color:var(--green)">0</div><div class="cap">答对</div></div>
+      <div><div class="num" id="oWrong" style="color:var(--red)">0</div><div class="cap">答错</div></div>
+      <div><div class="num" id="oRate">0%</div><div class="cap">正确率</div></div>
+    </div>
+    <div class="bar"><i id="oBar" style="width:0%"></i></div>
+    <div class="acc">点击题目切换：灰＝未做 · 绿＝答对 · 红＝答错</div>
+  </section>
+
+  <!-- 真题 -->
+  <section>
+    <div class="toolbar">
+      <button id="btnExpand">🔽 展开全部</button>
+      <button id="btnCollapse">🔼 收起全部</button>
+    </div>
+    <div id="years"></div>
+  </section>
+
+  <!-- 生词本 -->
+  <section class="card">
+    <h2><span class="dot"></span>生词本 📖</h2>
+    <div class="addrow">
+      <input id="wWord" type="text" placeholder="单词" style="flex:1.2">
+      <input id="wMean" type="text" placeholder="释义 / 例句" style="flex:1.8">
+      <button id="btnAdd">＋</button>
+    </div>
+    <div class="wsearch"><input id="wSearch" type="text" placeholder="🔍 搜索单词"></div>
+    <div class="wcount" id="wCount">共 0 个单词</div>
+    <div id="wList"></div>
+    <div class="wbtns">
+      <button class="exp" id="btnExport">📤 导出 / 汇总</button>
+      <button class="clr" id="btnClear">🗑️ 清空</button>
+    </div>
+  </section>
+
+  <!-- 备份 -->
+  <section class="card">
+    <h2><span class="dot"></span>数据备份 💾</h2>
+    <div class="bk">
+      <button class="out" id="btnBackup">📥 导出备份</button>
+      <button class="in" id="btnRestore">📤 导入备份</button>
+    </div>
+    <input type="file" id="restoreFile" accept=".json,application/json" style="display:none">
+    <p class="bknote">数据保存在本机浏览器本地，不会上传网络。换手机 / 清理浏览器前，记得先用「导出备份」保存一份，再在新手机「导入备份」即可恢复。</p>
+  </section>
+
+  <footer>
+    <div>由 <span class="brand2">William</span> 出品 <span class="heart">❤</span></div>
+    <div>为郭丹妮同学特别定制 · 一战成硕 ✨</div>
+  </footer>
+</div>
+
+<!-- 导出弹窗 -->
+<div class="modal-bg" id="modal">
+  <div class="modal">
+    <button class="close" id="modalClose">✕</button>
+    <h3 id="modalTitle">导出</h3>
+    <textarea id="modalText" readonly></textarea>
+    <div class="mbtns">
+      <button class="copy" id="modalCopy">📋 复制</button>
+      <button class="dl" id="modalDl">⬇️ 下载 .txt</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  var KEY = 'gd_english_plan_v1';
+  var YEARS = [];
+  for(var y=2009; y<=2026; y++) YEARS.push(y);
+  var TOTAL_Q = YEARS.length * 20; // 18年 * 20题 = 360
+  var EXAM = new Date(2026, 11, 19, 8, 30, 0); // 2026-12-19 08:30 本地时间
+
+  // ---------- 数据 ----------
+  var data = {v:1, answers:{}, words:[], checkins:{}, notes:{}};
+  function normalize(){
+    if(!data.answers) data.answers={};
+    if(!data.words) data.words=[];
+    if(!data.checkins) data.checkins={};
+    if(!data.notes) data.notes={};
+  }
+  function load(){
+    try{
+      var raw = localStorage.getItem(KEY);
+      if(raw){ var d = JSON.parse(raw); if(d && d.v===1){ data = d; normalize(); } }
+    }catch(e){}
+  }
+  function save(){
+    try{ localStorage.setItem(KEY, JSON.stringify(data)); }catch(e){ toast('保存失败：浏览器存储不可用'); }
+  }
+  function yearData(y){
+    if(!data.answers[y]) data.answers[y] = {q:Array(20).fill(''), reason:''};
+    return data.answers[y];
+  }
+
+  // ---------- 工具 ----------
+  function $(id){ return document.getElementById(id); }
+  var toastTimer;
+  function toast(msg){
+    var t=$('toast'); t.textContent=msg; t.classList.add('show');
+    clearTimeout(toastTimer); toastTimer=setTimeout(function(){t.classList.remove('show');},1800);
+  }
+
+  // ---------- 倒计时 ----------
+  function pad(n){ return (n<10?'0':'')+n; }
+  function tick(){
+    var now = new Date();
+    var diff = EXAM - now;
+    if(diff<0) diff=0;
+    var d = Math.floor(diff/86400000);
+    var h = Math.floor(diff%86400000/3600000);
+    var m = Math.floor(diff%3600000/60000);
+    var s = Math.floor(diff%60000/1000);
+    $('dDays').textContent = d;
+    $('dTime').textContent = pad(h)+' : '+pad(m)+' : '+pad(s);
+  }
+
+  // ---------- 天气 ----------
+  var WMO = {0:['☀️','晴'],1:['🌤️','晴间多云'],2:['⛅','多云'],3:['☁️','阴'],
+    45:['🌫️','雾'],48:['🌫️','雾凇'],51:['🌦️','毛毛雨'],53:['🌦️','毛毛雨'],55:['🌦️','毛毛雨'],
+    56:['🌧️','冻雨'],57:['🌧️','冻雨'],61:['🌦️','小雨'],63:['🌧️','中雨'],65:['🌧️','大雨'],
+    66:['🌧️','冻雨'],67:['🌧️','冻雨'],71:['🌨️','小雪'],73:['🌨️','中雪'],75:['❄️','大雪'],
+    77:['🌨️','雪粒'],80:['🌦️','阵雨'],81:['🌧️','阵雨'],82:['🌧️','强阵雨'],
+    85:['🌨️','阵雪'],86:['🌨️','阵雪'],95:['⛈️','雷雨'],96:['⛈️','雷雨伴冰雹'],99:['⛈️','雷雨伴冰雹']};
+  function uvLevel(u){
+    if(u<3) return ['弱','#34c77b'];
+    if(u<6) return ['中等','#ffb347'];
+    if(u<8) return ['强','#ff7a45'];
+    if(u<11) return ['很强','#ff5d7a'];
+    return ['极强','#c13a6e'];
+  }
+  function setWeather(w){
+    var c = WMO[w.weather_code] || ['⛅','—'];
+    $('wIcon').textContent = c[0];
+    $('wDesc').textContent = c[1];
+    $('wTemp').textContent = Math.round(w.temperature_2m);
+    $('wFeel').textContent = Math.round(w.apparent_temperature);
+    $('wHum').textContent = Math.round(w.relative_humidity_2m);
+    $('wUv').textContent = (Math.round(w.uv_index*10)/10).toFixed(1);
+    var lv = uvLevel(w.uv_index);
+    var b=$('wUvLv'); b.textContent=lv[0]; b.style.background=lv[1];
+    var t = w.time ? w.time.replace('T',' ') : '';
+    $('wUpdate').textContent = '更新于 ' + t + ' · 数据源 Open-Meteo';
+    try{ localStorage.setItem(KEY+'_wx', JSON.stringify({w:w,t:Date.now()})); }catch(e){}
+  }
+  function fetchWeather(){
+    fetch('https://api.open-meteo.com/v1/forecast?latitude=32.0603&longitude=118.7969&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,uv_index&timezone=Asia%2FShanghai')
+      .then(function(r){ return r.json(); })
+      .then(function(j){ if(j && j.current) setWeather(j.current); })
+      .catch(function(){ $('wUpdate').textContent='天气获取失败（可检查网络）'; });
+    // 先展示缓存
+    try{
+      var c = JSON.parse(localStorage.getItem(KEY+'_wx'));
+      if(c && c.w){ setWeather(c.w); }
+    }catch(e){}
+  }
+
+  // ---------- 打卡 ----------
+  var calY, calM;
+  function initCal(){ var d=new Date(); calY=d.getFullYear(); calM=d.getMonth(); }
+  function dkey(y,m,d){ return y+'-'+pad(m+1)+'-'+pad(d); }
+  function checked(y,m,d){ return !!data.checkins[dkey(y,m,d)]; }
+  function todayKey(){ var n=new Date(); return dkey(n.getFullYear(),n.getMonth(),n.getDate()); }
+  function calcStreak(){
+    var n=0, t=new Date();
+    if(!data.checkins[dkey(t.getFullYear(),t.getMonth(),t.getDate())]) t.setDate(t.getDate()-1);
+    while(data.checkins[dkey(t.getFullYear(),t.getMonth(),t.getDate())]){ n++; t.setDate(t.getDate()-1); }
+    return n;
+  }
+  function renderCheckin(){
+    $('ckStreak').textContent = calcStreak();
+    $('ckTotal').textContent = Object.keys(data.checkins).length;
+    var isToday = !!data.checkins[todayKey()];
+    var b=$('ckBtn');
+    b.textContent = isToday ? '✓ 今日已打卡' : '🎀 今日打卡';
+    b.classList.toggle('done', isToday);
+    $('ckMonth').textContent = calY+'年'+(calM+1)+'月';
+    var noteEl=$('ckNote');
+    if(document.activeElement!==noteEl) noteEl.value = data.notes[todayKey()]||'';
+    renderCal();
+  }
+  function renderCal(){
+    var startDow = new Date(calY, calM, 1).getDay();
+    var daysIn = new Date(calY, calM+1, 0).getDate();
+    var now = new Date();
+    var html = '';
+    ['日','一','二','三','四','五','六'].forEach(function(w){ html += '<div class="wd">'+w+'</div>'; });
+    for(var i=0;i<startDow;i++) html += '<div class="day blank"></div>';
+    for(var d=1; d<=daysIn; d++){
+      var isT = (calY===now.getFullYear() && calM===now.getMonth() && d===now.getDate());
+      var isC = checked(calY, calM, d);
+      html += '<div class="day'+(isT?' today':'')+(isC?' checked':'')+'">'+(isC?'💗':d)+'</div>';
+    }
+    $('ckGrid').innerHTML = html;
+  }
+  window.toggleToday = function(){
+    var k = todayKey();
+    if(data.checkins[k]) delete data.checkins[k]; else data.checkins[k]=true;
+    save(); renderCheckin();
+  };
+  window.navCal = function(delta){
+    calM += delta;
+    if(calM<0){ calM=11; calY--; }
+    if(calM>11){ calM=0; calY++; }
+    renderCheckin();
+  };
+  window.onNote = function(v){
+    data.notes[todayKey()] = v; save();
+  };
+
+  // ---------- 统计 ----------
+  function stats(){
+    var done=0,right=0,wrong=0;
+    YEARS.forEach(function(y){
+      var q = (data.answers[y]||{}).q||[];
+      q.forEach(function(v){ if(v==='c'){done++;right++;} else if(v==='w'){done++;wrong++;} });
+    });
+    return {done:done,right:right,wrong:wrong,rate: done? Math.round(right/done*100):0};
+  }
+  function yearStats(y){
+    var q=(data.answers[y]||{}).q||[];
+    var done=0,right=0;
+    q.forEach(function(v){ if(v==='c'){done++;right++;} else if(v==='w')done++; });
+    return {done:done,right:right,rate:done?Math.round(right/done*100):0};
+  }
+  function rateColor(r, done){
+    if(!done) return 'var(--grey)';
+    if(r>=80) return 'var(--green)';
+    if(r>=60) return 'var(--orange)';
+    return 'var(--red)';
+  }
+  function renderOverview(){
+    var s = stats();
+    $('oDone').textContent = s.done;
+    $('oRight').textContent = s.right;
+    $('oWrong').textContent = s.wrong;
+    $('oRate').textContent = s.rate + '%';
+    $('oBar').style.width = (s.done? s.right/s.done*100 : 0) + '%';
+  }
+  function renderYears(){
+    var html='';
+    YEARS.forEach(function(y){
+      var yd = yearData(y);
+      var st = yearStats(y);
+      var col = rateColor(st.rate, st.done);
+      html += '<div class="year" data-y="'+y+'">';
+      html += '<div class="year-head" onclick="cycleYear('+y+')">';
+      html += '<span class="y">'+y+'年</span>';
+      html += '<div class="bar-mini"><i style="width:'+(st.done?st.right/st.done*100:0)+'%;background:'+col+'"></i></div>';
+      html += '<span class="rate" style="color:'+col+'">'+st.rate+'%</span>';
+      html += '<span class="arrow">▼</span>';
+      html += '</div>';
+      html += '<div class="year-body">';
+      for(var p=1;p<=4;p++){
+        html += '<div class="passage"><div class="pname">Text '+p+' · 阅读</div><div class="qs">';
+        for(var i=1;i<=5;i++){
+          var idx=(p-1)*5+(i-1);
+          var v=yd.q[idx]||'';
+          var cls = v==='c'?'c':(v==='w'?'w':'');
+          var mark = v==='c'?'✓':(v==='w'?'✗':i);
+          html += '<div class="q '+cls+'" onclick="cycleQ('+y+','+idx+')">'+mark+'</div>';
+        }
+        html += '</div></div>';
+      }
+      html += '<div class="reason"><label>📝 错题原因 / 笔记（自动保存）</label>';
+      html += '<textarea placeholder="这一年的错题错在哪、为什么错…" oninput="onReason('+y+',this.value)">'+esc(yd.reason||'')+'</textarea></div>';
+      html += '</div></div>';
+    });
+    $('years').innerHTML = html;
+  }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  // 暴露到全局（用于 inline onclick）
+  window.cycleQ = function(y, idx){
+    var yd = yearData(y);
+    var v = yd.q[idx]||'';
+    yd.q[idx] = v===''?'c':(v==='c'?'w':'');
+    save(); renderOverview(); renderYears();
+  };
+  window.cycleYear = function(y){
+    var el = document.querySelector('.year[data-y="'+y+'"]');
+    if(el) el.classList.toggle('open');
+  };
+  window.onReason = function(y, val){
+    yearData(y).reason = val; save();
+  };
+
+  // ---------- 生词本 ----------
+  function renderWords(filter){
+    filter = (filter||'').toLowerCase();
+    var list = data.words;
+    var shown = filter? list.filter(function(w){return (w.w+' '+w.m).toLowerCase().indexOf(filter)>=0;}) : list;
+    $('wCount').textContent = '共 '+list.length+' 个单词'+(filter?'（筛选后 '+shown.length+' 个）':'');
+    if(!shown.length){ $('wList').innerHTML='<div class="empty">还没有生词，快记录第一个吧 ✏️</div>'; return; }
+    var html='';
+    shown.forEach(function(w, i){
+      var realIdx = data.words.indexOf(w);
+      html += '<div class="word"><div class="w">'+esc(w.w)+'</div><div class="m">'+esc(w.m)+'</div><button class="del" onclick="delWord('+realIdx+')">✕</button></div>';
+    });
+    $('wList').innerHTML = html;
+  }
+  window.delWord = function(i){ data.words.splice(i,1); save(); renderWords($('wSearch').value); };
+  function addWord(){
+    var w=$('wWord').value.trim(), m=$('wMean').value.trim();
+    if(!w){ toast('请先输入单词'); return; }
+    data.words.unshift({w:w, m:m||'', t:Date.now()});
+    save(); $('wWord').value=''; $('wMean').value='';
+    renderWords($('wSearch').value); toast('已记录 ✔');
+  }
+  function wordsText(){
+    return data.words.map(function(x){ return x.w + '\t' + (x.m||''); }).join('\n');
+  }
+  function openModal(title, text){
+    $('modalTitle').textContent=title;
+    $('modalText').value=text;
+    $('modal').classList.add('show');
+  }
+  function exportWords(){
+    if(!data.words.length){ toast('生词本还是空的'); return; }
+    var head = '郭丹妮 生词本汇总（共 '+data.words.length+' 词）\n' + new Date().toLocaleString() + '\n--------------------------------\n';
+    openModal('生词本汇总', head + wordsText());
+  }
+
+  // ---------- 备份 ----------
+  function download(filename, content, type){
+    var blob = new Blob([content], {type:type||'text/plain;charset=utf-8'});
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  }
+  function exportBackup(){
+    download('郭丹妮英语冲刺计划-备份-'+dateStr()+'.json', JSON.stringify(data,null,2), 'application/json');
+    toast('备份已导出');
+  }
+  function dateStr(){ var d=new Date(); return d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0'); }
+
+  // ---------- 事件绑定 ----------
+  $('btnExpand').onclick=function(){ document.querySelectorAll('.year').forEach(function(e){e.classList.add('open');}); };
+  $('btnCollapse').onclick=function(){ document.querySelectorAll('.year').forEach(function(e){e.classList.remove('open');}); };
+  $('btnAdd').onclick=addWord;
+  $('wWord').addEventListener('keydown',function(e){ if(e.key==='Enter') addWord(); });
+  $('wMean').addEventListener('keydown',function(e){ if(e.key==='Enter') addWord(); });
+  $('wSearch').addEventListener('input',function(){ renderWords(this.value); });
+  $('btnExport').onclick=exportWords;
+  $('btnClear').onclick=function(){
+    if(!data.words.length){ toast('已经是空的'); return; }
+    if(confirm('确定清空所有生词吗？此操作不可恢复。')){ data.words=[]; save(); renderWords(''); }
+  };
+  $('btnBackup').onclick=exportBackup;
+  $('btnRestore').onclick=function(){ $('restoreFile').click(); };
+  $('restoreFile').addEventListener('change',function(e){
+    var f=e.target.files[0]; if(!f) return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var d=JSON.parse(r.result);
+        if(!d || !d.answers){ toast('备份文件格式不正确'); return; }
+        data=d; normalize(); save(); renderOverview(); renderYears(); renderWords(''); renderCheckin();
+        toast('导入成功 ✔');
+      }catch(err){ toast('导入失败：文件损坏'); }
+    };
+    r.readAsText(f);
+    e.target.value='';
+  });
+  $('modalClose').onclick=function(){ $('modal').classList.remove('show'); };
+  $('modalCopy').onclick=function(){
+    var t=$('modalText').value;
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(t).then(function(){toast('已复制 ✔');},function(){fallbackCopy(t);});
+    } else fallbackCopy(t);
+  };
+  function fallbackCopy(t){
+    $('modalText').removeAttribute('readonly'); $('modalText').select();
+    try{ document.execCommand('copy'); toast('已复制，请手动粘贴'); }catch(e){ toast('复制失败，请长按文字手动复制'); }
+    $('modalText').setAttribute('readonly','');
+  }
+  $('modalDl').onclick=function(){ download('郭丹妮生词本-'+dateStr()+'.txt', $('modalText').value); };
+  $('modal').addEventListener('click',function(e){ if(e.target===this) this.classList.remove('show'); });
+
+  // ---------- 启动 ----------
+  load();
+  initCal();
+  renderOverview();
+  renderYears();
+  renderWords('');
+  renderCheckin();
+  tick(); setInterval(tick, 1000);
+  fetchWeather();
+})();
+</script>
+</body>
+</html>
